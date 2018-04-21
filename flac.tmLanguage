@@ -1,0 +1,226 @@
+{
+    "uuid": "b095c611-75c4-4280-af1f-72c1cac74826", 
+    "repository": {
+        "OtherKeywords": {
+            "name": "function.constant.flac", 
+            "match": "\\b((Layers|Point|Spline|CatmullRom|Circle|Ellipse|BSpline|Ruled\\s+Surface|Plane\\s+Surface|Volume|Line\\s+Loop|Line|Surface\\s+Loop|Surface))\\b"
+        }, 
+        "SelfFunctions": {
+            "name": "keyword.other.flac", 
+            "match": "(\\b(RelocateMesh|SetOrder|Print|Sleep|SyatemCall|NonBlockingSystemCall|SetName|SyncModel|Macro|NewModel|Include|RefineMesh|Draw|Merge|Delete|BoundingBox|SetChanged|Show|Hide|CombinedBoundary|Boundary|Coherence|Transfinite\\s+Line|Transfinite\\s+Surface|Recombine\\s+Surface|Recombine|)\\b)"
+        }, 
+        "flacFunctions": {
+            "patterns": [
+                {
+                    "include": "#ExpressionFunctions"
+                }, 
+                {
+                    "include": "#NormalFunctions"
+                }, 
+                {
+                    "include": "#SelfFunctions"
+                }
+            ]
+        }, 
+        "flacTag": {
+            "name": "keyword.other.flac", 
+            "match": "\\s*(Phy#|Enty#)\\s*"
+        }, 
+        "Strings": {
+            "name": "string.quoted.double.flac", 
+            "match": "\\\"((\\\\\\\")*[^$\\\"])*\\\""
+        }, 
+        "LineComments": {
+            "match": "(//.*)", 
+            "captures": {
+                "2": {
+                    "name": "punctuation.definition.comment.line.flac"
+                }, 
+                "1": {
+                    "name": "comment.line.number-sign.flac"
+                }
+            }
+        }, 
+        "OperatorKeywords": {
+            "name": "keyword.operator.flac", 
+            "match": "\\s*(-|!|\\+\\+|--|\\^|\\*|%|\\+|-|=|==|\\+=|-=|\\*=|/=|!=|>|>=|<|<=|&&|\\|\\||\\?|:|#)\\s*"
+        }, 
+        "ExpressionFunctions": {
+            "patterns": [
+                {
+                    "include": "#flacFunctions"
+                }, 
+                {
+                    "include": "#Expression"
+                }, 
+                {
+                    "include": "#Strings"
+                }
+            ], 
+            "begin": "(\\b(Show|Hide|AdaptMesh|CombinedBoundary|Boundary|Extrude|Translate|BoundingBox|Duplicata|Rotate|Dilate|Symmetry|Transfinite\\s+Surface|Recombine\\s+Surface|Transfinite\\s+Line))(\\s*(\\{))", 
+            "beginCaptures": {
+                "0": {
+                    "name": "support.function.flac"
+                }
+            }, 
+            "end": "(\\s*(\\}))", 
+            "endCaptures": {
+                "0": {
+                    "name": "support.function.flac"
+                }
+            }
+        }, 
+        "PhysicalGroupTag": {
+            "name": "keyword.other.flac", 
+            "match": "(\\s*\\$.*\\$\\s*)"
+        }, 
+        "Variable": {
+            "name": "variable.parameter.flac", 
+            "match": "([a-zA-Z_][a-zA-Z0-9]*)"
+        }, 
+        "ControlKeywords": {
+            "name": "keyword.control.flac", 
+            "match": "\\b(Include|Error|Printf|Exit|Abort|Call|Return|ElseIf|For|In|EndFor|If|EndIf|Else)\\s*"
+        }, 
+        "Expression": {
+            "patterns": [
+                {
+                    "include": "#LineComments"
+                }, 
+                {
+                    "include": "#MultipleLineComments"
+                }, 
+                {
+                    "include": "#Constants"
+                }, 
+                {
+                    "include": "#SelfFunctions"
+                }, 
+                {
+                    "include": "#OperatorKeywords"
+                }, 
+                {
+                    "include": "#ControlKeywords"
+                }, 
+                {
+                    "include": "#OtherKeywords"
+                }, 
+                {
+                    "include": "#OtherConstants"
+                }, 
+                {
+                    "include": "#Variable"
+                }
+            ]
+        }, 
+        "MultipleLineComments": {
+            "name": "comment.block.flac", 
+            "begin": "(/\\*([^*]|[\\r\\n]|(\\*+([^*/]|[\\r\\n])))*)", 
+            "end": "(\\*+/)"
+        }, 
+        "OtherConstants": {
+            "name": "keyword.other.flac", 
+            "match": "\\b(Mesh.SubdivisionAlgorithm|Physicals|Variables|Options|TotalMemory|Memory|Cpu|Pi|flac_MAJOR_VERSION|flac_MINOR_VERSION|flac_PATCH_VERSION|MPI_Size|MPI_Rank)\\b"
+        }, 
+        "Constants": {
+            "name": "constant.numeric.flac", 
+            "match": "\\b(flac_MAJOR_VERSION|flac_MINOR_VERSION|flac_PATCH_VERSION|MPI_Size|MPI_Rank|Cpu|Memory|TotalMemory|lc|Pi|newp|newl|news|newv|newll|newsl|newreg|(-)?[0-9.]+|(-)?[0-9.]+e(-)?[0-9.]+)\\b"
+        }, 
+        "NormalFunctions": {
+            "patterns": [
+                {
+                    "include": "#Functions"
+                }, 
+                {
+                    "include": "#Expression"
+                }, 
+                {
+                    "include": "#Strings"
+                }, 
+                {
+                    "include": "#flacSyntaxing"
+                }
+            ], 
+            "begin": "(\\b(SetNumber|SetString|Acos|Asin|Atan|Atan2|Ceil|Cos|Cosh|Exp|Fabs|Fmod|Floor|Hypot|Log|Log10|Modulo|Rand|Round|Sqrt|Sin|Sinh|Tan|Tanh|Delete|Compound\\s+Line|Compound\\s+Surface|Compound\\s+Volume|Split\\s+Line|Physical\\s+Point|Physical\\s+Line|Physical\\s+Surface|Physical\\s+Volume)(\\s*\\())", 
+            "beginCaptures": {
+                "0": {
+                    "name": "support.function.flac"
+                }
+            }, 
+            "end": "(\\s*(\\)))", 
+            "endCaptures": {
+                "0": {
+                    "name": "support.function.flac"
+                }
+            }
+        }, 
+        "illegal": {
+            "name": "invalid.illegal.unrecognized.flac", 
+            "match": "[^\\s}]"
+        }, 
+        "Chars": {
+            "name": "string.quoted.single.flac", 
+            "match": "\\'((\\\\\\')*[^\\'])*\\'"
+        }
+    }, 
+    "name": "flac", 
+    "fileTypes": [
+        "flac"
+    ], 
+    "scopeName": "source.flac", 
+    "patterns": [
+        {
+            "name": "entity.other.document-start.flac", 
+            "match": "^---(?= |$)"
+        }, 
+        {
+            "name": "entity.other.document-end.flac", 
+            "match": "^\\.{3}$"
+        }, 
+        {
+            "include": "#MultipleLineComments"
+        }, 
+        {
+            "include": "#LineComments"
+        }, 
+        {
+            "include": "#flacFunctions"
+        }, 
+        {
+            "include": "#ExpressionFunctions"
+        }, 
+        {
+            "include": "#NormalFunctions"
+        }, 
+        {
+            "include": "#SelfFunctions"
+        }, 
+        {
+            "include": "#Strings"
+        }, 
+        {
+            "include": "#Chars"
+        }, 
+        {
+            "include": "#Expression"
+        }, 
+        {
+            "include": "#Constants"
+        }, 
+        {
+            "include": "#OperatorKeywords"
+        }, 
+        {
+            "include": "#ControlKeywords"
+        }, 
+        {
+            "include": "#OtherKeywords"
+        }, 
+        {
+            "include": "#OtherConstants"
+        }, 
+        {
+            "include": "#Variable"
+        }
+    ]
+}
